@@ -1,0 +1,165 @@
+:root {
+  --light: white;
+  --black: rgba(0, 0, 0, 0.725);
+  --grey: #777;
+  --smooth-grey: rgb(229, 231, 232);
+  --bgColor: #f8f9fa;
+  --borderColor: #dddddd;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: "Merriweather", serif;
+  height: 100vh;
+
+  margin: 0;
+  padding: 20px;
+  background-color: var(--bgColor);
+}
+
+/* Hide the scrollbar in WebKit browsers */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.bot{
+  height: 50px;
+}
+
+
+.header-with-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* Space between the icon and text */
+}
+
+.header-icon {
+  font-size: 18px;
+  color: var(--black);
+  margin-bottom: 18px;
+}
+
+/* Ensure consistent box-sizing */
+input,
+textarea {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--black);
+  /* Initial border color */
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: "Merriweather", serif;
+  box-sizing: border-box;
+  /* Ensure border doesn't affect layout */
+  background-color: rgba(247, 248, 249, 0.58);
+}
+
+/* Focus styles for input and textarea */
+input:focus,
+textarea:focus {
+  border: 1px solid rgba(0, 0, 0, 1);
+  /* Keep the same border size */
+  outline: 2px solid rgba(0, 0, 0, 1);
+  /* Use outline for focus effect */
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.325);
+  /* Optional: add shadow for focus */
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--bgColor);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--borderColor);
+}
+
+h1 {
+  text-align: left;
+  color: var(--black);
+  font-size: 20px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+  color: var(--black);
+  font-weight: 600;
+}
+
+#noteTitle {
+  font-family: "Merriweather", serif;
+  color: rgb(184, 185, 185);
+}
+
+#noteTitle::placeholder {
+  color: rgb(184, 185, 185);
+  font-family: "Merriweather", serif;
+}
+
+input,
+textarea {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid var(--borderColor);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  overflow: visible;
+}
+
+input,
+textarea::placeholder {
+  color: rgb(184, 185, 185);
+  font-family: "Merriweather", serif;
+  font-size: small;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: Black;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: "Merriweather", serif;
+}
+
+button:hover {
+  background-color: rgb(74, 74, 74);
+}
+
+.message {
+  margin-top: 10px;
+  color: green;
+  font-size: 14px;
+  text-align: center;
+}
+
+.note-display {
+  margin-top: 20px;
+  padding: 10px;
+  background: #e9f7ef;
+  border-left: 4px solid #34c759;
+}
+
+/* Larger paragraphs */
+.note-display p {
+  font-size: 18px;
+  /* Increased font size for bigger paragraphs */
+  line-height: 1.6;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Responsive Note Page</title>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+ES+Deco+Guides&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Playwrite+ES+Deco+Guides&display=swap"
+    rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Playwrite+ES+Deco+Guides&family=Signika:wght@300..700&display=swap"
+    rel="stylesheet">
+
+
+
+  <link rel="stylesheet" href="styles.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+</head>
+
+<body>
+  <div class="note-container">
+    <header class="note-header">
+      <div class="note-title">
+        <h1 id="note-title">Loading...</h1>
+      </div>
+
+      <div class="note-meta">
+        <p id="note-date">Fetching date...</p>
+        <div class="line"></div>
+        <p id="note-char-count">Fetching character count...</p>
+      </div>
+    </header>
+
+    <main class="note-content">
+      <div id="note-content" style="margin-top: 10px;">Loading content...</div>
+    </main>
+  </div>
+
+  <!-- Floating Button -->
+  <div class="floating-menu">
+    <button id="floating-btn" class="floating-btn"><i class="fas fa-plus"></i></button>
+    <div id="menu-items" class="menu-items hidden">
+      <button onclick="changeFontStyle()"><i class="fas fa-font"></i> Font Style</button>
+      <button onclick="changeFontSize()"><i class="fas fa-text-height"></i> Font Size</button>
+      <button onclick="changeFontColor()"><i class="fas fa-palette"></i> Font Color</button>
+      <button onclick="toggleDarkMode()"><i class="fas fa-adjust"></i> Dark/Light</button>
+      <a href="../beta/"><button><i class="fas fa-sticky-note"></i> New Note</button></a>
+      <button onclick="goToTop()"><i class="fas fa-arrow-up"></i> Scroll Up</button>
+
+    </div>
+
+  </div>
+
+
+</body>
+
+<script type="module" src="./script.js"></script>
+<script>
+
+  document.getElementById('floating-btn').addEventListener('click', () => {
+    const menuItems = document.getElementById('menu-items');
+    const floatingBtn = document.getElementById('floating-btn');
+
+    // Toggle the visibility of the menu
+    menuItems.classList.toggle('hidden');
+
+    // Rotate the plus icon
+    floatingBtn.classList.toggle('rotated');
+  });
+
+  function changeFontStyle() {
+    document.body.style.fontFamily = 'Arial, sans-serif';
+  }
+
+  function changeFontSize() {
+    document.body.style.fontSize = '18px';
+  }
+
+  function changeFontColor() {
+    document.body.style.color = '#007BFF';
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
+
+  // CSS for dark mode
+  const style = document.createElement('style');
+  style.textContent = `
+  .dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+  }
+`;
+  document.head.append(style);
+
+
+
+  // New function to go to the top of the page
+  function goToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    // Optional: Hide the menu after scrolling
+    const menuItems = document.getElementById
+    ('menu-items');
+    const floatingBtn = document.getElementById
+    ('floating-btn');
+    menuItems.classList.add('hidden');
+    floatingBtn.classList.toggle('rotated');
+
+  }
+
+</script>
+
+
+</html>

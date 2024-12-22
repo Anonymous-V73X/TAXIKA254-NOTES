@@ -1,0 +1,170 @@
+:root {
+  --light: white;
+  --black: black;
+  --grey: grey;
+  --smooth-grey: rgb(229, 231, 232);
+}
+
+/* Base styles */
+body {
+  font-family: "Bai Jamjuree", serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--light);
+  color: var(--black);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body::-webkit-scrollbar {
+  width: 0px;
+}
+
+::selection {
+  background: var(--black);
+  color: var(--light);
+
+}
+
+/* For Firefox compatibility */
+::-moz-selection {
+  background: black;
+  color: white;
+}
+
+.note-container {
+  width: 100%;
+}
+
+/* Header section */
+.note-header {
+  color: var(--black);
+  padding: 1rem;
+  text-align: left;
+}
+
+.note-header .note-title {
+  margin: 0;
+}
+
+.note-header h1 {
+  font-size: 1.4rem;
+  margin-bottom: -0.1rem;
+}
+
+.note-meta {
+  font-size: 0.7rem;
+  display: flex;
+  gap: 8px;
+  color: var(--grey);
+  padding-left: 0.2rem;
+}
+
+.line {
+  height: 12px;
+  background-color: var(--grey);
+  margin: 0.7rem 0;
+  width: 0.1px;
+}
+
+/* Main content */
+.note-content {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  background: var(--light);
+  margin-top: -1.6rem;
+  font-weight: 500;
+}
+
+.floating-menu {
+  position: fixed;
+  bottom: 20px;
+  left: 88%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-family: "Signika", sans-serif;
+}
+
+.floating-btn {
+  width: 50px;
+  height: 50px;
+  background-color: var(--black);
+  color: var(--light);
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  z-index: 10; /* Keep it above the menu */
+}
+
+.floating-btn:hover {
+  background-color: var(--black);
+  transform: scale(1.03);
+}
+
+.menu-items {
+  position: absolute;
+  bottom: 60px; /* Place the menu just above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 8px;
+
+  z-index: 5; /* Place it below the button */
+  font-family: "Signika", sans-serif;
+}
+
+.menu-items.hidden {
+  display: none;
+}
+
+.menu-items button {
+  padding: 10px 15px;
+  background-color: var(--smooth-grey);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Signika", sans-serif;
+  width: 120px !important;
+  margin-right: 40px;
+}
+
+.menu-items button:hover {
+  background-color: var(--black);
+  color: var(--light);
+}
+.menu-items button i {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.fa-plus {
+  font-size: 16px;
+  color: var(--light);
+}
+
+.floating-btn i {
+  transition: transform 0.3s ease;
+}
+
+.floating-btn.rotated i {
+  transform: rotate(135deg);
+}
+
+.floating-btn.rotated {
+  background-color: var(--black);
+  transform: translateX(-18px);
+}
