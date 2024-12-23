@@ -20,7 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Precomputed hash for the secret word  (SHA-256)
+// Precomputed hash for the secret word (SHA-256)
 const storedHash =
   "816eb5b979c291748e3febaaf762408d11b6d9f1cd8c6561b80cb47721ca378f";
 
@@ -63,11 +63,21 @@ document
       }
 
       // Authenticate with Firebase if the secret is valid
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      // Save login success and login time to localStorage
+      localStorage.setItem("userEmail", user.email); // Save user email
+      localStorage.setItem("loginTime", new Date().toISOString()); // Save login time
+
       alert("Login successful!");
 
       // Redirect after successful login
-      window.location.href = "../"; // Change this to your desired redirect path
+      window.location.href = "./home/"; // Change this to your desired redirect path
     } catch (error) {
       alert("Login failed: " + error.message); // Display error if login fails
     }

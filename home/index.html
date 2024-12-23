@@ -22,7 +22,6 @@
     rel="stylesheet">
 
   <style>
-    
     body {
       font-family: Signika, sans-serif;
       margin: 0;
@@ -140,7 +139,7 @@
 
 <body>
   <div class="container">
-    <div class="header" >
+    <div class="header">
       <h4 class="title" style="margin-left: 3px;">My Notes</h4>
       <i id="floating-btn" class="fas fa-feather-alt"></i>
     </div>
@@ -151,7 +150,7 @@
   <script type="module">
 
     document.getElementById('floating-btn').addEventListener('click', () => {
-      window.location.href = './beta';
+      window.location.href = '../beta';
     });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
@@ -214,7 +213,7 @@
             // Add click event listener to save note ID in session storage
             card.addEventListener('click', () => {
               sessionStorage.setItem('selectedNoteId', noteId);
-              window.location.href = './alpha/';
+              window.location.href = '../alpha';
             });
 
             cardsContainer.appendChild(card);
