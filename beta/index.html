@@ -5,19 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Save Note to Firebase</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-  
-
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Agu+Display&family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+ES+Deco+Guides&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Signika:wght@300..700&display=swap"
     rel="stylesheet">
-
-
-    <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
@@ -46,8 +40,8 @@
   <!-- Firebase SDKs -->
   <script type="module">
     document.querySelector('.header-with-icon').addEventListener('click', () => {
-        window.location.href = '../';
-      });
+      window.location.href = '../';
+    });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
     import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
@@ -83,15 +77,13 @@
         return;
       }
 
-      // Save note with custom key
+      // Generate a unique note ID using a timestamp and random string
+      const uniqueId = `anonStories${Date.now()}${Math.floor(Math.random() * 1000000)}`;
+
+      // Save note with custom unique ID
       const notesRef = ref(database, 'notes');
       try {
-        const snapshot = await get(notesRef);
-        const notes = snapshot.exists() ? snapshot.val() : {};
-        const noteCount = Object.keys(notes).length + 1;
-        const noteKey = `v73xnote${noteCount}`;
-
-        await set(child(notesRef, noteKey), {
+        await set(child(notesRef, uniqueId), {
           title,
           content,
           charCount,
@@ -99,7 +91,7 @@
         });
 
         // Display Success Message
-        document.getElementById('message').textContent = `Note saved successfully as ${noteKey}!`;
+        document.getElementById('message').textContent = `Note saved successfully with ID ${uniqueId}!`;
         document.getElementById('noteForm').reset();
 
         // Display the formatted content

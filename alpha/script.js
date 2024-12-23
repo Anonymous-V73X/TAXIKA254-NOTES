@@ -85,8 +85,8 @@ function formatContent(content) {
   let paragraphBuffer = [];
 
   lines.forEach((line) => {
-    // Check if the line is uppercase (likely a heading)
-    if (/^[A-Z\s\d]+$/.test(line) && line.length > 1) {
+    // Check if the line is uppercase (likely a heading), including special characters like hyphens
+    if (/^[A-Z\s\d\-!?,.]+$/.test(line) && line.length > 1) {
       // Process any buffered paragraph before adding the heading
       if (paragraphBuffer.length > 0) {
         newContent += `<p>${paragraphBuffer.join(" ")}</p>`; // Join buffered lines into a single paragraph
@@ -113,6 +113,7 @@ function formatContent(content) {
 
   return newContent;
 }
+
 
 // Function to apply a random font
 function applyRandomFont() {
