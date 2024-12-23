@@ -23,6 +23,7 @@ import {
   getDatabase,
   ref,
   get,
+  set,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
 const firebaseConfig = {
@@ -135,4 +136,43 @@ function applyRandomFont() {
 window.onload = () => {
   applyRandomFont();
   loadNote();
+};
+
+// Attach deleteStory to window object for global access
+window.deleteStory = function () {
+  if (
+    confirm(
+      "Are you sure you want to delete this story? This action cannot be undone."
+    )
+  ) {
+    const storyId = sessionStorage.getItem("selectedNoteId");
+
+    if (!storyId) {
+      alert("No story found to delete.");
+      return;
+    }
+
+    deleteStoryFromDB(storyId)
+      .then(() => {
+        sessionStorage.removeItem("selectedNoteId");
+        alert("Story deleted successfully.");
+        window.location.href = "../";
+      })
+      .catch((error) => {
+        console.error("Error deleting story:", error);
+        alert("Failed to delete the story. Please try again.");
+      });
+  } else {
+    // Optional: Hide the menu after scrolling
+    const menuItems = document.getElementById("menu-items");
+    const floatingBtn = document.getElementById("floating-btn");
+    menuItems.classList.add("hidden");
+    floatingBtn.classList.toggle("rotated");
+  }
+};
+
+// Attach Firebase deletion function to window object
+window.deleteStoryFromDB = async function (storyId) {
+  const storyRef = ref(database, `notes/${storyId}`);
+  await set(storyRef, null);
 };

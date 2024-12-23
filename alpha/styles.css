@@ -26,6 +26,12 @@ body::-webkit-scrollbar {
 
 }
 
+
+button.deletebtn:hover {
+  color: white!important;
+  background-color: red !important;
+}
+
 /* For Firefox compatibility */
 ::-moz-selection {
   background: black;
