@@ -1,237 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notes Homepage</title>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js"></script>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Agu+Display&family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+ES+Deco+Guides&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Signika:wght@300..700&display=swap"
+  <title>ANONNOTEZ: Sign in</title>
+  <link rel="stylesheet" type="text/css" href="stylez.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
-  <style>
-    body {
-      font-family: Signika, sans-serif;
-      margin: 0;
-      padding: 0;
-
-    }
-
-    :root {
-      --light: white;
-      --black: black;
-      --grey: #777;
-      --smooth-grey: rgb(229, 231, 232);
-      --bgColor: #f8f9fa;
-      --borderColor: #dddddd;
-      --shadow: rgba(0, 0, 0, 0.1);
-    }
-
-    /* Base styles */
-    body {
-      -webkit-tap-highlight-color: transparent;
-      background-color: var(--bgColor);
-    }
-
-    body::-webkit-scrollbar {
-      width: 0px;
-    }
-
-    ::selection {
-      background: var(--black);
-      color: var(--light);
-
-    }
-
-    /* For Firefox compatibility */
-    ::-moz-selection {
-      background: black;
-      color: white;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-left: 10px;
-      padding-right: 10px;
-      padding-bottom: 50px;
-      padding-top: 0px;
-      margin-top: -30px;
-    }
-
-    .title {
-      text-align: left;
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-
-    .card {
-      background-color: var(--light);
-      border: 1px solid var(--borderColor);
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 2px 4px var(--shadow);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .card:hover {
-      transform: scale(1.01);
-    }
-
-    .card-title {
-      font-size: 1rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .card-meta {
-      display: flex;
-      font-size: 0.8rem;
-      color: var(--grey);
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .card-meta span {
-      display: block;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-    }
-
-    .fa-feather-alt {
-      cursor: pointer;
-      margin-top: 22px;
-      font-size: 16px;
-
-      padding: 10px;
-      border-radius: 50%;
-      background-color: var(--black);
-      color: var(--light);
-
-    }
-  </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="header" >
-      <h4 class="title" style="margin-left: 3px;">My Notes</h4>
-      <i id="floating-btn" class="fas fa-feather-alt"></i>
-    </div>
-
-    <div id="cards" class="cards" style="margin-left: 3px;">Loading notes...</div>
-  </div>
-
-  <script type="module">
-
-    document.getElementById('floating-btn').addEventListener('click', () => {
-      window.location.href = './beta';
-    });
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCjo5Q7udPIXCVUFJYG4Dp1hcpLvAElg6o",
-      authDomain: "money-92adb.firebaseapp.com",
-      databaseURL: "https://money-92adb-default-rtdb.firebaseio.com",
-      projectId: "money-92adb",
-      storageBucket: "money-92adb.appspot.com",
-      messagingSenderId: "1042572717494",
-      appId: "1:1042572717494:web:f056df88597e53c3a0e517",
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-
-    async function loadNotes() {
-      const notesRef = ref(database, 'notes');
-      try {
-        const snapshot = await get(notesRef);
-        const cardsContainer = document.getElementById('cards');
-
-        if (snapshot.exists()) {
-          const notes = snapshot.val();
-          cardsContainer.innerHTML = ''; // Clear existing content
-
-          // Convert notes object to array and sort by date
-          const sortedNotes = Object.entries(notes).sort(([, a], [, b]) => {
-            const dateA = new Date(a.date || 0);
-            const dateB = new Date(b.date || 0);
-            return dateB - dateA; // Sort descending by date
-          });
-
-          sortedNotes.forEach(([noteId, note]) => {
-            // Count words in the note content
-            const wordCount = note.content ? note.content.split(/\s+/).filter(Boolean).length : 0;
-
-            // Calculate read time (200 words per minute)
-            const readTime = Math.ceil(wordCount / 200);
-
-            // Determine read time display
-            const readTimeDisplay =
-              readTime > 60
-                ? `${Math.floor(readTime / 60)} hour${Math.floor(readTime / 60) > 1 ? 's' : ''}`
-                : `${readTime} min`;
-
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-          <div class="card-title">${note.title || 'Untitled'}</div>
-          <div class="card-meta">
-            <span>Date: ${note.date || 'No date available'}</span>
-            <span>${wordCount} words</span>
-            <span>Est. read time: ${readTimeDisplay}</span>
+  <div class="login-root">
+    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+      <div class="loginbackground box-background--white padding-top--64">
+        <div class="loginbackground-gridContainer">
+          <div class="box-root flex-flex" style="grid-area: top / start / 8 / end;">
+            <div class="box-root"
+              style="background-image: linear-gradient(white 0%, rgb(247, 250, 252) 33%); flex-grow: 1;">
+            </div>
           </div>
-        `;
+          <div class="box-root flex-flex" style="grid-area: 4 / 2 / auto / 5;">
+            <div class="box-root box-divider--light-all-2 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 6 / start / auto / 2;">
+            <div class="box-root box-background--blue800" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 7 / start / auto / 4;">
+            <div class="box-root box-background--blue animationLeftRight" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 8 / 4 / auto / 6;">
+            <div class="box-root box-background--gray100 animationLeftRight tans3s" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 2 / 15 / auto / end;">
+            <div class="box-root box-background--cyan200 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 3 / 14 / auto / end;">
+            <div class="box-root box-background--blue animationRightLeft" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 4 / 17 / auto / 20;">
+            <div class="box-root box-background--gray100 animationRightLeft tans4s" style="flex-grow: 1;"></div>
+          </div>
+          <div class="box-root flex-flex" style="grid-area: 5 / 14 / auto / 17;">
+            <div class="box-root box-divider--light-all-2 animationRightLeft tans3s" style="flex-grow: 1;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+        <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+          <h1><a href="./" rel="dofollow">ANONV73X</a></h1>
+        </div>
+        <div class="formbg-outer">
+          <div class="formbg">
+            <div class="formbg-inner padding-horizontal--48">
+              <span class="padding-bottom--15">Sign In </span>
+              <form id="stripe-login">
 
-            // Add click event listener to save note ID in session storage
-            card.addEventListener('click', () => {
-              sessionStorage.setItem('selectedNoteId', noteId);
-              window.location.href = './alpha/';
-            });
+                <!-- Corrected input fields for email and password -->
+                <div class="field padding-bottom--24">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email">
+                </div>
 
-            cardsContainer.appendChild(card);
-          });
-        } else {
-          cardsContainer.innerHTML = '<p>No notes found.</p>';
-        }
-      } catch (error) {
-        console.error('Error fetching notes:', error);
-        document.getElementById('cards').innerHTML = '<p>Error loading notes.</p>';
-      }
-    }
+                <div class="field padding-bottom--24">
+                  <label for="driverName">Secret Word:</label>
+                  <input type="text" id="driverName" name="driverName">
+                </div>
+
+                <div class="field padding-bottom--24">
+                  <div class="grid--50-50">
+                    <label for="password">Password:</label>
+                    <div class="reset-pass">
+                      <a href="#">Forgot your password?</a>
+                    </div>
+                  </div>
+                  <input type="password" id="password" name="password">
+                </div>
 
 
-    window.onload = loadNotes;
 
-  </script>
 
+                <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
+
+                  <label for="checkbox">
+
+                  </label>
+
+                </div>
+                <div class="field padding-bottom--24">
+                  <input type="submit" name="submit" value="Continue">
+                </div>
+                <div class="field">
+                  <a class="ssolink" href="#">*All fields are required!</a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="footer-link padding-top--24">
+            <span>Don't have an account? <a href="">Sign up</a></span>
+            <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+              <span><a href="#">© ANONV73X</a></span>
+              <span><a href="#">Contact</a></span>
+              <span><a href="#">Privacy & terms</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
+
+<script type="module" src="dash.js"></script>
 
 </html>
