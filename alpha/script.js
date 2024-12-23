@@ -44,6 +44,7 @@ async function loadNote() {
   if (!noteId) {
     document.getElementById("note-title").textContent = "No note selected.";
     document.getElementById("note-content").textContent = "";
+    window.location.href = "../";
     return;
   }
 
