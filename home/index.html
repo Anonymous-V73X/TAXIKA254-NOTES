@@ -232,7 +232,7 @@
       const loginTime = localStorage.getItem("loginTime");
 
       if (!loginTime) {
-        alert("No login time found. Redirecting to login...");
+        //alert("No login time found. Redirecting to login...");
         window.location.href = "../";
         return;
       }
@@ -242,10 +242,10 @@
       const timeElapsed = currentTime - loginTimestamp;
 
       // 12 hours in milliseconds
-      const twelveHours =  10000;
+      const twelveHours =  12 * 60 * 60 * 1000;
 
       if (timeElapsed > twelveHours) {
-        alert("Session expired. Redirecting to login...");
+        //alert("Session expired. Redirecting to login...");
         window.location.href = "../";
       }
     }

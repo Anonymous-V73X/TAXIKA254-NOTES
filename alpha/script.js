@@ -115,7 +115,6 @@ function formatContent(content) {
   return newContent;
 }
 
-
 // Function to apply a random font
 function applyRandomFont() {
   const fontNames = Object.keys(fontStylesJSON); // Get all font names
@@ -133,12 +132,6 @@ function applyRandomFont() {
   // Apply the font to the body
   document.body.style.fontFamily = randomFont;
 }
-
-// Apply the random font on window load
-window.onload = () => {
-  applyRandomFont();
-  loadNote();
-};
 
 // Attach deleteStory to window object for global access
 window.deleteStory = function () {
@@ -179,14 +172,13 @@ window.deleteStoryFromDB = async function (storyId) {
   await set(storyRef, null);
 };
 
-
 // Function to check if login time has exceeded 10 seconds
 function checkLoginTimeout() {
   const loginTime = localStorage.getItem("loginTime"); // Retrieve login time from localStorage
 
   if (!loginTime) {
     // No login time saved, redirect to login
-    alert("No login time found. Redirecting to login...");
+    //alert("No login time found. Redirecting to login...");
     window.location.href = "../"; // Replace with your login page URL
     return;
   }
@@ -197,8 +189,9 @@ function checkLoginTimeout() {
   const timeElapsed = currentTime - loginTimestamp;
 
   // Check if time elapsed is more than 10 seconds
-  if (timeElapsed > 10000) { // 10 seconds = 10000 milliseconds
-    alert("Session expired. Redirecting to login...");
+  if (timeElapsed > 12*60*60*1000) {
+    // 10 seconds = 10000 milliseconds
+    //alert("Session expired. Redirecting to login...");
     window.location.href = "../"; // Replace with your login page URL
   }
 }
@@ -210,5 +203,7 @@ function startSessionCheck() {
 
 // Call this function on page load
 window.onload = () => {
+  applyRandomFont();
+  loadNote();
   startSessionCheck();
 };

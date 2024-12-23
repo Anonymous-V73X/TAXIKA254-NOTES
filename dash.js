@@ -73,7 +73,7 @@ document
       localStorage.setItem("userEmail", user.email); // Save user email
       localStorage.setItem("loginTime", new Date().toISOString()); // Save login time
 
-      alert("Login successful!");
+     // alert("Login successful!");
 
       // Redirect after successful login
       window.location.href = "./home/"; // Change this to your desired redirect path
