@@ -44,7 +44,7 @@ async function loadNote() {
   if (!noteId) {
     document.getElementById("note-title").textContent = "No note selected.";
     document.getElementById("note-content").textContent = "";
-    window.location.href = "../";
+    window.location.href = "../notes/";
     return;
   }
 
@@ -158,7 +158,7 @@ window.deleteStory = function () {
       .then(() => {
         sessionStorage.removeItem("selectedNoteId");
         alert("Story deleted successfully.");
-        window.location.href = "../";
+        window.location.href = "../notes/";
       })
       .catch((error) => {
         console.error("Error deleting story:", error);
@@ -177,4 +177,38 @@ window.deleteStory = function () {
 window.deleteStoryFromDB = async function (storyId) {
   const storyRef = ref(database, `notes/${storyId}`);
   await set(storyRef, null);
+};
+
+
+// Function to check if login time has exceeded 10 seconds
+function checkLoginTimeout() {
+  const loginTime = localStorage.getItem("loginTime"); // Retrieve login time from localStorage
+
+  if (!loginTime) {
+    // No login time saved, redirect to login
+    alert("No login time found. Redirecting to login...");
+    window.location.href = "../"; // Replace with your login page URL
+    return;
+  }
+
+  // Convert ISO string back to a timestamp
+  const loginTimestamp = new Date(loginTime).getTime();
+  const currentTime = Date.now();
+  const timeElapsed = currentTime - loginTimestamp;
+
+  // Check if time elapsed is more than 10 seconds
+  if (timeElapsed > 10000) { // 10 seconds = 10000 milliseconds
+    alert("Session expired. Redirecting to login...");
+    window.location.href = "../"; // Replace with your login page URL
+  }
+}
+
+// Start session timeout check
+function startSessionCheck() {
+  setInterval(checkLoginTimeout, 1000); // Check every second
+}
+
+// Call this function on page load
+window.onload = () => {
+  startSessionCheck();
 };

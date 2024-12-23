@@ -52,8 +52,7 @@ document
     const driverName = document.getElementById("driverName").value;
 
     try {
-      console.log("Driver Name (Raw):", driverName);
-
+     
       // Verify the secret word entered by the user
       const isValidSecret = await verifySecret(driverName);
 

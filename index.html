@@ -63,10 +63,7 @@
                   <input type="email" id="email" name="email">
                 </div>
 
-                <div class="field padding-bottom--24">
-                  <label for="driverName">Secret Word:</label>
-                  <input type="text" id="driverName" name="driverName">
-                </div>
+
 
                 <div class="field padding-bottom--24">
                   <div class="grid--50-50">
@@ -77,6 +74,28 @@
                   </div>
                   <input type="password" id="password" name="password">
                 </div>
+
+                <div class="field padding-bottom--24">
+                  <label for="driverName">Secret Word:</label>
+                  <input type="text" id="driverName" name="driverName" required>
+                  
+                </div>
+                
+                <script>
+                  const inputField = document.getElementById('driverName');
+                  const toggleVisibility = document.getElementById('toggleVisibility');
+
+                  toggleVisibility.addEventListener('click', () => {
+                    if (inputField.type === 'password') {
+                      inputField.type = 'text';
+                    
+                    } else {
+                      inputField.type = 'password';
+                      
+                    }
+                  });
+                </script>
+
 
 
 
