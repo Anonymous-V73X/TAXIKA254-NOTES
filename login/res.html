@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Login</title>
+  <script type="module" src="dash.js"></script>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fefefe;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    h1 {
+      color: #f7b32b;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    /* Form Styles */
+    form {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    form label {
+      font-weight: bold;
+      color: #555;
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #f7b32b;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #e5a023;
+    }
+
+    /* Dashboard Styles */
+    #dashboard {
+      margin-top: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    #receiptList {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #receiptList li {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: #555;
+      text-align: left;
+    }
+  </style>
+
+</head>
+
+<body>
+  
+  <h1>Driver Login</h1>
+
+  <form id="loginForm">
+    <label for="driverName">Name:</label>
+    <input type="text" id="driverName" required><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required><br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" required><br><br>
+    <button type="submit"> Login </button>
+  </form>
+
+  <div id="dashboard" style="display:none;">
+
+    <h2>Welcome, <span id="loggedDriver"></span>!</h2>
+    <h3>Your Log Details:</h3>
+    <ul id="receiptList"></ul>
+
+  </div>
+
+</body>
+
+</html>
